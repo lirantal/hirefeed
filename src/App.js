@@ -14,18 +14,25 @@ class App extends Component {
     this.stepReset = this.stepReset.bind(this);
     this.updateRegistration = this.updateRegistration.bind(this);
 
-    this.state = {
-      organization: {
-        name: 'Appi',
-        id: '1'
-      },
+    this.stateSeed = {
       meetingType: '',
       userName: '',
       userPhone: '',
       userEmail: '',
       steps: ['welcome', 'meetingtype', 'registration'],
       stepsPos: 0
-    };
+    }
+
+    this.state = Object.assign(
+      {}, 
+      {
+        organization: {
+        name: 'Appi',
+        id: '1'
+        }
+      },
+      this.stateSeed
+    );
     
   }
   
@@ -34,7 +41,7 @@ class App extends Component {
   }
   
   stepReset() {
-    this.setState({stepsPos: 0, registration: this.registration});
+    this.setState(this.stateSeed);
   }
   
   updateRegistration(key, val) {
