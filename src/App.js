@@ -9,6 +9,7 @@ class App extends Component {
   constructor() {
     super();
     
+    this.baseURL = 'https://api.github.com/repos/lirantal/hirefeed/';
     // bind event handlers
     this.stepNext = this.stepNext.bind(this);
     this.stepReset = this.stepReset.bind(this);
@@ -21,19 +22,32 @@ class App extends Component {
       userEmail: '',
       steps: ['welcome', 'meetingtype', 'registration'],
       stepsPos: 0
-    }
+    };
 
     this.state = Object.assign(
-      {}, 
-      {
-        organization: {
-        name: 'Appi',
-        id: '1'
-        }
-      },
+      {},
       this.stateSeed
     );
     
+  }
+  
+  componentWillMount() {
+    
+    // Grab application identifier based on the URL, stripping the forward slash
+    let path = window.location.pathname.substring(1);
+    
+    // Fetching a dummy URL for now to mock the API request
+    fetch(this.baseURL + path)
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          organization: {
+            name: 'Appi',
+            id: 'appi-1232-4917-3898'
+          }
+        });
+      })
+      .catch((err) => console.log(err));
   }
   
   stepNext() {
@@ -56,6 +70,15 @@ class App extends Component {
   }
   
   render() {
+    
+    if (this.state.organization === undefined) {
+      return (
+        <div className="App">
+          Loading...
+        </div>
+      );
+    }
+    
     let step = null;
     if (this.state.steps[this.state.stepsPos % this.state.steps.length] === 'welcome') {
       step = <Welcome onClick={this.stepNext} />;
