@@ -4,10 +4,7 @@ class RegistrationForm extends Component {
     
     constructor() {
         super();
-        this.style =  {
-            margin: 5
-        }
-        
+
         this.state = {
             userName: '',
             userPhone: '',
@@ -42,21 +39,52 @@ class RegistrationForm extends Component {
     
     render() {
         return (
-            <div className="form">
-                Name:
-                <input style={this.style} type="text" name="name" placeholder="Full name"
-                    value={this.state.userName} onChange={this.onNameChange} />
-                Email:
-                <input style={this.style} type="text" name="email" placeholder="Email address"
-                    value={this.state.userEmail} onChange={this.onEmailChange} />
-                Phone:
-                <input style={this.style} type="tel" name="phone" placeholder="Phone number"
-                    value={this.state.userPhone} onChange={this.onPhoneChange} />
-                    
-                <button onClick={this.updateForm} > Submit </button>
-                
-                <p>{JSON.stringify(this.state)}</p>
-            </div>
+          <div className="row">
+              <div className="col-lg-12">
+
+                  <form className="form-horizontal">
+                      <fieldset>
+
+                          <legend>
+                              Register
+                          </legend>
+
+                          <div className="form-group">
+                              <label htmlFor="inputName" className="col-lg-2 control-label">Name</label>
+                              <div className="col-lg-10">
+                                  <input name="name" type="text" className="form-control" placeholder="Name"
+                                         value={this.state.userName} onChange={this.onNameChange} />
+                              </div>
+                          </div>
+
+                          <div className="form-group">
+                              <label htmlFor="inputEmail" className="col-lg-2 control-label">Email</label>
+                              <div className="col-lg-10">
+                                  <input name="email" type="text" className="form-control" placeholder="Email"
+                                         value={this.state.userEmail} onChange={this.onEmailChange} />
+                              </div>
+                          </div>
+
+                          <div className="form-group">
+                              <label htmlFor="inputPhone" className="col-lg-2 control-label">Phone</label>
+                              <div className="col-lg-10">
+                                  <input name="phone" type="text" className="form-control" placeholder="Phone"
+                                         value={this.state.userPhone} onChange={this.onPhoneChange} />
+                              </div>
+                          </div>
+
+                          <div className="form-group">
+                              <div className="col-lg-10 col-lg-offset-2">
+                                  <button type="reset" className="btn btn-default" onClick={this.props.reset}>Cancel</button>
+                                  <button type="submit" className="btn btn-primary" onClick={this.updateForm}>Submit</button>
+                              </div>
+                          </div>
+
+                      </fieldset>
+                  </form>
+
+              </div>
+          </div>
         );
     }
 }

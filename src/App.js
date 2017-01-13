@@ -89,34 +89,65 @@ class App extends Component {
     }
     
     if (this.state.steps[this.state.stepsPos % this.state.steps.length] === 'registration') {
-      step = <RegistrationForm onClick={this.stepNext} updateCallback={this.updateRegistration} />;
+      step = <RegistrationForm onClick={this.stepNext} updateCallback={this.updateRegistration} reset={this.stepReset} />;
     }
     
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to {this.state.organization.name}</h2>
+
+        <div className="container">
+
+          <div className="row">
+            <div className="col-lg-12">
+
+              <div className="bs-component">
+                <div className="jumbotron">
+
+                  <div>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h1>{this.state.organization.name}</h1>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+              <div className="page-header">
+              </div>
+
+              {step}
+
         </div>
-        
-        <div>
-          <p>
-            {this.state.steps}
-          </p>
-          <p>
-            {this.state.stepsPos}
-          </p>
-        </div>
-      
-        {step}
-        
-        <button onClick={this.stepReset}> Reset </button>
-        
-        <p> debug the state: {JSON.stringify(this.state)}</p>
       </div>
+
     );
   }
   
 }
 
 export default App;
+
+/*
+
+ <div className="App-header">
+
+ <h2>Welcome to </h2>
+ </div>
+
+ <div>
+ <p>
+ {this.state.steps}
+ </p>
+ <p>
+ {this.state.stepsPos}
+ </p>
+ </div>
+
+ {step}
+
+ <button onClick={this.stepReset}> Reset </button>
+
+ <p> debug the state: {JSON.stringify(this.state)}</p>
+ */
